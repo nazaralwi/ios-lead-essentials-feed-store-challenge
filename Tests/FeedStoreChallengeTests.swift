@@ -22,13 +22,13 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
     override func setUp() {
         super.setUp()
                 
-        try? FileManager.default.removeItem(at: testSpecificsStoreURL())
+        setupEmptyStoreState()
     }
     
     override func tearDown() {
         super.tearDown()
                 
-        try? FileManager.default.removeItem(at: testSpecificsStoreURL())
+        undoStoreSideEffects()
     }
     
 	func test_retrieve_deliversEmptyOnEmptyCache() {
@@ -115,6 +115,18 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
         addTeardownBlock { [weak instance] in
             XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
         }
+    }
+    
+    private func setupEmptyStoreState() {
+        deleteStoreArtifacts()
+    }
+    
+    private func undoStoreSideEffects() {
+        deleteStoreArtifacts()
+    }
+    
+    private func deleteStoreArtifacts() {
+        try? FileManager.default.removeItem(at: testSpecificsStoreURL())
     }
     
     private func testSpecificsStoreURL() -> URL {
