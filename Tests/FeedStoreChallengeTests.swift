@@ -142,21 +142,23 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 //
 //  ***********************
 
-//extension FeedStoreChallengeTests: FailableRetrieveFeedStoreSpecs {
+extension FeedStoreChallengeTests: FailableRetrieveFeedStoreSpecs {
+
+	func test_retrieve_deliversFailureOnRetrievalError() {
+		let sut = makeSUT()
+
+        try! "invalid data".write(to: testSpecificsStoreURL(), atomically: false, encoding: .utf8)
+        
+		assertThatRetrieveDeliversFailureOnRetrievalError(on: sut)
+	}
+
+	func test_retrieve_hasNoSideEffectsOnFailure() {
+//		let sut = makeSUT()
 //
-//	func test_retrieve_deliversFailureOnRetrievalError() {
-////		let sut = makeSUT()
-////
-////		assertThatRetrieveDeliversFailureOnRetrievalError(on: sut)
-//	}
-//
-//	func test_retrieve_hasNoSideEffectsOnFailure() {
-////		let sut = makeSUT()
-////
-////		assertThatRetrieveHasNoSideEffectsOnFailure(on: sut)
-//	}
-//
-//}
+//		assertThatRetrieveHasNoSideEffectsOnFailure(on: sut)
+	}
+
+}
 
 //extension FeedStoreChallengeTests: FailableInsertFeedStoreSpecs {
 //
