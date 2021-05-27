@@ -19,6 +19,6 @@ public final class CodableFeedStore: FeedStore {
     }
     
     public func retrieve(completion: @escaping RetrievalCompletion) {
-        
+        completion(.empty)
     }
 }
