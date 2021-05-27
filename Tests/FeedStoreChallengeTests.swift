@@ -94,8 +94,9 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 	// - MARK: Helpers
 	
 	private func makeSUT() -> FeedStore {
-		fatalError("Must be implemented")
-	}
+        let sut = CodableFeedStore()
+        return sut
+    }
 	
 }
 
