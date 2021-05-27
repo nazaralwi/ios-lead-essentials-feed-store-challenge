@@ -6,8 +6,10 @@
 import Foundation
 
 public final class CodableFeedStore: FeedStore {
-    public init() {
-        
+    private let storeURL: URL
+    
+    public init(storeURL: URL) {
+        self.storeURL = storeURL
     }
     
     private struct Cache: Codable {
@@ -36,9 +38,7 @@ public final class CodableFeedStore: FeedStore {
             return LocalFeedImage(id: id, description: description, location: location, url: url)
         }
     }
-    
-    private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
-    
+        
     public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
         guard FileManager.default.fileExists(atPath: storeURL.path) else {
             return completion(nil)
