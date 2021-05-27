@@ -19,6 +19,22 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
     //
     //  ***********************
 
+    override func setUp() {
+        super.setUp()
+        
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
+        
+        try? FileManager.default.removeItem(at: storeURL)
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
+        
+        try? FileManager.default.removeItem(at: storeURL)
+    }
+    
 	func test_retrieve_deliversEmptyOnEmptyCache() {
 		let sut = makeSUT()
 
@@ -32,9 +48,9 @@ class FeedStoreChallengeTests: XCTestCase, FeedStoreSpecs {
 	}
 
 	func test_retrieve_deliversFoundValuesOnNonEmptyCache() {
-//		let sut = makeSUT()
-//
-//		assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(on: sut)
+		let sut = makeSUT()
+
+		assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(on: sut)
 	}
 
 	func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
