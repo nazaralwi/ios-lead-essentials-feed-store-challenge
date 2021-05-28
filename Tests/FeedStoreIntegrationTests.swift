@@ -78,13 +78,24 @@ class FeedStoreIntegrationTests: XCTestCase {
     private func makeSUT() -> FeedStore {
         fatalError("Must be implemented")
     }
-    
+        
     private func setupEmptyStoreState() {
-
-    }
-
-    private func undoStoreSideEffects() {
-
+        deleteStoreArtifacts()
     }
     
+    private func undoStoreSideEffects() {
+        deleteStoreArtifacts()
+    }
+    
+    private func deleteStoreArtifacts() {
+        try? FileManager.default.removeItem(at: testSpecificsStoreURL())
+    }
+    
+    private func testSpecificsStoreURL() -> URL {
+        return cachesDirectory().appendingPathComponent("\(type(of: self)).store")
+    }
+    
+    private func cachesDirectory() -> URL {
+        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    }
 }
