@@ -91,7 +91,7 @@ private extension NSManagedObjectModel {
 }
 
 @objc (ManagedCache)
-private class ManagedCache: NSManagedObject {
+private final class ManagedCache: NSManagedObject {
     @NSManaged var timestamp: Date
     @NSManaged var feed: NSOrderedSet
     
@@ -112,7 +112,7 @@ private class ManagedCache: NSManagedObject {
 }
 
 @objc (ManagedFeedImage)
-private class ManagedFeedImage: NSManagedObject {
+private final class ManagedFeedImage: NSManagedObject {
     @NSManaged var id: UUID
     @NSManaged var imageDescription: String?
     @NSManaged var location: String?
